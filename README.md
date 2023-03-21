@@ -48,10 +48,48 @@ Now, the script to be run is *map_gene_id.R*. This script enables the lifting of
 After this step, an intersection between the two sets of expressed genes in the different cell lines is identified: this is the set on which the eCLIP and miCLIP data are then going to be filtered, as well. The filtered outputs miCLIP and eCLIP are respectively saved in 'miCLIP.filt.out.bed' and 'peaks.crosslink.anno.filt.bed'. 
 
 The next step is to produce sequences of homogenous length to be inputted in the model; the code to produce said sequences is contained in the Jupyter Notebook *THESIS - Encoding*. 
-First, the file 'hg38.genome' is downloaded; it contains the lengths of human chromosomes for the genome version hg38. The RBP-binding site coordinates of the files 'peaks.crosslink.anno.filt.bed' in the respective RBP folder are now sloped to a length of 400 nucleotides and then converted into FASTA sequences. This .fasta file contains what will later be the positive-labelled data to be inputted in the model.   
+First, the file 'hg38.genome' is downloaded; it contains the lengths of human chromosomes for the genome version hg38. The RBP-binding site coordinates of the files 'peaks.crosslink.anno.filt.bed' in the respective RBP folder are now sloped to a length of 400 nucleotides and then converted into FASTA sequences using BedTools, producing respectively the files 'peaks.crosslink.anno.filt.bed.slop' and 'peaks.crosslink.anno.filt.bed.slop.fasta'. 
+This fasta file contains what will later be the positive-labelled data to be inputted in the model. 
+The negative-labelled sequences have been sampled exploring the binding site-neighbouring sequence space; two types of negatives were produced :
 
+- negative-1, unbound sequences not containing RBP binding sites
+- negative-2, sequences bound to other RBPs, not the one in exam 
 
+For every RBP, a new folder is created, with organization : 
+>RBP
+> 
+>>fold 0
+>>
+>>fold1
+>>
+>>fold2
+>>
+>>fold3
+>>
+>>fold4
+>> 
+>>>positive.fold-4
+>>>
+>>>>.bed
+>>>>
+>>>>.fasta
+>>>>
+>>>negative-1.fold-4
+>>>
+>>>>.bed
+>>>>
+>>>>.fasta
+>>>>
+>>>negative-2.fold-4
+>>>
+>>>>.bed
+>>>>
+>>>>.fasta
+>>>>
 
+The positive and negative sequences were divided into 5 folds, to enable an equilibrated CrossValidation. The .fasta files are used for the dataset preparation of the baseline model, which does not contain m6A information. 
+
+In order to include m6A data in the dataset, more preprocessing steps are required. 
 
 
 
