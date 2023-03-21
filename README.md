@@ -43,19 +43,18 @@ Packages to be installed in the environment, ....
 The first Jupyter Notebook to be run is *THESIS - Preprocessing*. 
 The RNA-seq input files are being filtered in order to retain the expressed genes: HEK293 is in a different genome version, so the filtered output is saved in 'expressed_gene_ids_HEK.xlsx'. 
 
-Now, the script to be run is *map_gene_id.R*. This script enables the lifting of the genes included in the file 'expressed_gene_ids_HEK.xlsx', from the version hg17 to the version hg19, in order to have equivalent versions throughot all files. The output file is cleaned from empty values and saved in 'inconsistenciesENSEMBL_noNaN.xlsx', which enables the production of a dictionary to be used in the Jupyter Notebook *THESIS - Preprocessing*. 
+Now, the script to be run is *map_gene_id.R*. This script enables the lifting of the genes included in the file 'expressed_gene_ids_HEK.xlsx', from the version hg19 to the version hg38, in order to have equivalent versions throughot all files. The output file is cleaned from empty values and saved in 'inconsistenciesENSEMBL_noNaN.xlsx', which enables the production of a dictionary to be used in the Jupyter Notebook *THESIS - Preprocessing*. 
 
-After this step, an intersection between the two sets of expressed genes in the different cell lines is identified: this is the set on which the eCLIP and miCLIP data are then going to be filtered, as well. 
+After this step, an intersection between the two sets of expressed genes in the different cell lines is identified: this is the set on which the eCLIP and miCLIP data are then going to be filtered, as well. The filtered outputs miCLIP and eCLIP are respectively saved in 'miCLIP.filt.out.bed' and 'peaks.crosslink.anno.filt.bed'. 
 
-The filtered outputs miCLIP and eCLIP are respectively saved in 'miCLIP.filt.bed' and 'peaks.crosslink.anno.filt.bed', for later use. 
-
-
-
+The next step is to produce sequences of homogenous length to be inputted in the model; the code to produce said sequences is contained in the Jupyter Notebook *THESIS - Encoding*. 
+First, the file 'hg38.genome' is downloaded; it contains the lengths of human chromosomes for the genome version hg38. The RBP-binding site coordinates of the files 'peaks.crosslink.anno.filt.bed' in the respective RBP folder are now sloped to a length of 400 nucleotides and then converted into FASTA sequences. This .fasta file contains what will later be the positive-labelled data to be inputted in the model.   
 
 
-The first step of the preprocessing was the filtering of the RNA-seq for expressed genes , and once found the intersection between the two cell lines in exam, the datasets eCLIP and miCLIP were filtered as well on the base of this common set of  expressed genes. The intersection in red is the dataset that is going to be utilized. 
 
-Talking about numbers, here we see how numerous the datasets are, the original and filtered  : the intersection between the two RNA-seq datsets is roughly 21 000 genes, the miCLIP is the smallest in comparison with the others and it’s 9000 sites; the eCLIp one is a bit more variable but usually each RBP-set contains 20 000 binding sites.  
+
+
+
 
 
 ### Dataset Preparation 
