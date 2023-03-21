@@ -50,7 +50,7 @@ After this step, an intersection between the two sets of expressed genes in the 
 The next step is to produce sequences of homogenous length to be inputted in the model; the code to produce said sequences is contained in the Jupyter Notebook *THESIS - Encoding*. 
 First, the file 'hg38.genome' is downloaded; it contains the lengths of human chromosomes for the genome version hg38. The RBP-binding site coordinates of the files 'peaks.crosslink.anno.filt.bed' in the respective RBP folder are now sloped to a length of 400 nucleotides and then converted into FASTA sequences using BedTools, producing respectively the files 'peaks.crosslink.anno.filt.bed.slop' and 'peaks.crosslink.anno.filt.bed.slop.fasta'. 
 This fasta file contains what will later be the positive-labelled data to be inputted in the model. 
-The negative-labelled sequences have been sampled exploring the binding site-neighbouring sequence space; two types of negatives were produced :
+The negative-labelled sequences have been sampled exploring the binding site-neighbouring sequence space, making sure not to have any overlapping; two types of negatives were produced :
 
 - negative-1, unbound sequences not containing RBP binding sites
 - negative-2, sequences bound to other RBPs, not the one in exam 
@@ -87,22 +87,30 @@ For every RBP, a new folder is created, with organization :
 >>>>.fasta
 >>>>
 
-The positive and negative sequences were divided into 5 folds, to enable an equilibrated CrossValidation. The .fasta files are used for the dataset preparation of the baseline model, which does not contain m6A information. 
+The size of the negatives were balanced with the positives and all of the dataset was divided into 5 folds, to enable an equilibrated CrossValidation. The .fasta files are used for the dataset preparation of the baseline model, which does not contain m6A information. 
 
-In order to include m6A data in the dataset, more preprocessing steps are required. 
-
-
+In order to include m6A data in the dataset, an additional preprocessing step is required: the filtering of the .bed files contained in the various folds for sequences containing at least one m6A site, the output is saved in the files '{file}.miclip.filt.bed.out'.  
 
 
+### 3. Dataset Preparation 
 
-### Dataset Preparation 
+Regarding the dataset preparation, there are three different settings to be considered: 
+- baseline : does not contain m6A information
+- setting A : contains only sequences which include at least one m6A site
+- setting B : ratio 1:1 between the sequences containing and non-containing m6A sites 
 
-At this point there is the preparation of the dataset used for the baseline model, which won’t contain any m6A information. The eCLIP binding site coordinates, for every protein,  have been slopped to a standard length of 400 nucleotides and then converted into fasta sequences. Afterwards the sequences have been onehot encoded in arrays of shape (400,4) . For the integration of  the m6A sites, a new column has been added to the previous arrays, which includes the onehot encoding of the sites, producing arrays of shape (400,5). 
-This is the production of the positive dataset. Regarding the negative dataset, different options were available: a set of unbound sequences and another set of sequences bound to other proteins ; these sets were produced investigating the neighbouring space from the sequences belonging to the positive set, making sure not to have any overlapping . The size of the negatives were balanced with the positives and all of the dataset was divided into 5 folders to make sure that the cross validation always contained a ratio between positives and negatives that made sense. 
+To summarize, every setting has the possibility of producing two separate datasets, one containing the unbound sequences as negative-labelled elements, and the other with bound-to-other-RBPs sequences as negatives.
 
 
 
-In this slide we can see the different settings of datasets that are used ( so far I have tested the Baseline and Setting A ) .  For the baseline setting there is the positive, which is the bound sequence, and then the two negatives: one is the unbound sequences and one is the bound to other RBPs. So basically from this setting we can produce two datasets to be inputted into the model, one is the combination of positive and negative 1 and the other is positive and negative 2. Going ahead, setting A is similar to the basic setting but it just investigates sequences that contain m6A sites, at least one. These are the settings that I have tested so far but there is another option which would be the setting B, in which there is a ratio 1:1 between the sequences containing and non-containing m6A sites. 
+
+
+-------------------------
+
+At this point there is the preparation of the dataset used for the baseline model, which won’t contain any m6A information. 
+
+the sequences have been onehot encoded in arrays of shape (400,4) . For the integration of  the m6A sites, a new column has been added to the previous arrays, which includes the onehot encoding of the sites, producing arrays of shape (400,5). 
+
 
 
 
