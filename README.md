@@ -101,15 +101,24 @@ Regarding the dataset preparation, there are three different settings to be cons
 
 To summarize, every setting has the possibility of producing two separate datasets, one containing the unbound sequences as negative-labelled elements, and the other with bound-to-other-RBPs sequences as negatives.
 
+For every setting, a Jupyter Notebook has been produced. In every *THESIS - Model* notebook, there is the creation of the particular dataset, via the one-hot encoding of the sequences in 4 channels and the addition of a fifth one to encode m6A site information, when needed. The splitting of stated dataset is performed in the following way:  
+
+<img src="https://user-images.githubusercontent.com/118368494/227172535-857a3f1e-666b-4d21-b3dd-2b7f6db94291.png"  width="50%" height="20%">
+
+--> Cross validation will be implemented, add it here 
+
+### 4. Model  
+
+The original model is found in *THESIS - Simple Model*, the architecture has been inspired by pysster [(Budach & Marsico, 2018)](https://pubmed.ncbi.nlm.nih.gov/29659719/) and then tuned on the input data in *THESIS - Loop Model*. 
+
+
+### 5. Aggregated Evaluation 
+
+The Jupyter Notebook *THESIS - Aggregated Evaluation* has the aim of comparing the results of the model trained with different datasets and give insights about the original question that drives this project: is there a correlation between the methylation m6A and the binding affinity of RBP ?  
 
 
 
 
--------------------------
-
-At this point there is the preparation of the dataset used for the baseline model, which won’t contain any m6A information. 
-
-the sequences have been onehot encoded in arrays of shape (400,4) . For the integration of  the m6A sites, a new column has been added to the previous arrays, which includes the onehot encoding of the sites, producing arrays of shape (400,5). 
 
 
 
