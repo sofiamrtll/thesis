@@ -1,7 +1,7 @@
 
 # Predicting interactions of m6A-regulated RNA-binding proteins 
 
-Sofia Martello   |   Master's Thesis Project   |   1st may 2023   |   TU Munich Campus Straubing 
+Sofia Martello   |   Master's Thesis Project   |   30th june 2023   |   TU Munich Campus Straubing 
 
 
 
@@ -46,9 +46,6 @@ The order in which the Jupyter Notebooks should be run is the following :
 - Baseline_vs_Setting_A_aug
 - Baseline_vs_Setting_B_aug
   
-For the Baseline_vs_Setting notebooks--> possibility to input either negative-1 (unbound sequences) or negative-2 (sequences bound to ther RBPs) as class 0. 
+For the Baseline_vs_Setting notebooks--> possibility to input either negative-1 (unbound sequences) or negative-2 (sequences bound to other RBPs) as class 0. 
 
 
-Credits : 
-
-LICENSE!!!!
