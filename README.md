@@ -1,6 +1,3 @@
-Your README file looks well-organized and informative. However, I can provide some suggestions to make it even clearer and more user-friendly. Here's a revised version:
-
----
 
 # Predicting Interactions of m6A-Regulated RNA-Binding Proteins
 
@@ -72,9 +69,6 @@ Run the Jupyter Notebooks in the following order:
 
 For the Baseline_vs_Setting notebooks, input either `negative-1` (unbound sequences) or `negative-2` (sequences bound to other RBPs) as class 0.
 
----
-
-Feel free to adapt it according to your preferences!
 # Predicting interactions of m6A-regulated RNA-binding proteins 
 
 Sofia Martello   |   Master's Thesis Project   |   30th june 2023   |   TU Munich Campus Straubing 
